@@ -1,0 +1,60 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Building Blocks App</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+var building = true;
+var blocks = [];
+
+function createBlock() {
+var block = $('<div class="block"></div>');
+block.css({
+position: 'absolute',
+left: Math.random() * $(window).width(),
+top: Math.random() * $(window).height(),
+width: '50px',
+height: '50px',
+background: '#' + Math.floor(Math.random() * 16777215).toString(16)
+});
+block.appendTo('body');
+blocks.push(block);
+}
+
+function destroyBlock() {
+var block = blocks.pop();
+block.remove();
+}
+
+$(window).on('keydown', function() {
+if (building) {
+createBlock();
+}
+});
+
+$(window).on('keyup', function() {
+building = false;
+setTimeout(function() {
+if (!building) {
+destroyBlock();
+}
+}, 1000);
+});
+});
+</script>
+</head>
+<body>
+<div class="container">
+<h1>Building Blocks App</h1>
+<p>Start talking to see the blocks build up. Stop talking to see them dissolve.</p>
+</div>
+</body>
+</html>
+
